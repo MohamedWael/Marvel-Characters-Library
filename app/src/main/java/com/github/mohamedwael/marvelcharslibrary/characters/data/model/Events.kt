@@ -14,5 +14,5 @@ data class Events(
 	val returned: Int? = null,
 
 	@field:SerializedName("items")
-	val items: List<ItemsItem?>? = null
+	val items: List<EventItem>? = null
 )

@@ -11,13 +11,16 @@ data class MarvelCharacter(
 	val urls: List<UrlsItem?>? = null,
 
 	@field:SerializedName("stories")
-	val stories: Stories? = null,
+	val stories: Events? = null,
 
 	@field:SerializedName("series")
-	val series: Series? = null,
+	val series: Events? = null,
 
 	@field:SerializedName("comics")
-	val comics: Comics? = null,
+	val comics: Events? = null,
+
+	@field:SerializedName("events")
+	val events: Events? = null,
 
 	@field:SerializedName("name")
 	val name: String? = null,
@@ -34,6 +37,4 @@ data class MarvelCharacter(
 	@field:SerializedName("resourceURI")
 	val resourceURI: String? = null,
 
-	@field:SerializedName("events")
-	val events: Events? = null
 )

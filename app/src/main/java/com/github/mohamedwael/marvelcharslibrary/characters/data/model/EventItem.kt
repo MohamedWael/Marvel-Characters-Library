@@ -2,7 +2,7 @@ package com.github.mohamedwael.marvelcharslibrary.characters.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ItemsItem(
+data class EventItem(
 
 	@field:SerializedName("name")
 	val name: String? = null,
