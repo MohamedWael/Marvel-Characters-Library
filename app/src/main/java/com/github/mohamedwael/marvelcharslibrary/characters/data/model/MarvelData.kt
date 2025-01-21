@@ -2,20 +2,20 @@ package com.github.mohamedwael.marvelcharslibrary.characters.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Data(
+data class MarvelData(
 
 	@field:SerializedName("total")
-	val total: String? = null,
+	val total: Int? = null,
 
 	@field:SerializedName("offset")
-	val offset: String? = null,
+	val offset: Int? = null,
 
 	@field:SerializedName("limit")
-	val limit: String? = null,
+	val limit: Int? = null,
 
 	@field:SerializedName("count")
-	val count: String? = null,
+	val count: Int? = null,
 
 	@field:SerializedName("results")
-	val results: List<ResultsItem?>? = null
+	val results: List<MarvelCharacter>? = null
 )

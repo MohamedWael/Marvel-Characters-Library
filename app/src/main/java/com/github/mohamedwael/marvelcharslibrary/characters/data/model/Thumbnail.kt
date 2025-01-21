@@ -4,9 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 data class Thumbnail(
 
-	@field:SerializedName("path")
-	val path: String? = null,
+    @field:SerializedName("path")
+    val path: String? = null,
 
-	@field:SerializedName("extension")
-	val extension: String? = null
-)
+    @field:SerializedName("extension")
+    val extension: String? = null
+) {
+    fun getFullPath(): String {
+        return "$path.$extension"
+    }
+}
