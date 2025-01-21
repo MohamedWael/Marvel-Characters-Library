@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Marvel characters library</string>
+    <string name="error_generic">Something went wrong. Please try again later.</string>
+    <string name="error_limit_greater_than_100">The limit cannot be greater than 100. Please reduce the limit and try again.</string>
+    <string name="error_limit_invalid_or_below_1">The limit is invalid or below 1. Please provide a valid limit.</string>
+    <string name="error_invalid_or_unrecognized_parameter">An invalid or unrecognized parameter was provided. Please check your input and try again.</string>
+    <string name="error_empty_parameter">A required parameter is empty. Please fill in all required fields.</string>
+    <string name="error_invalid_or_unrecognized_ordering_parameter">The ordering parameter is invalid or unrecognized. Please provide a valid ordering parameter.</string>
+    <string name="error_too_many_values">Too many values were sent for a multi-value filter. Please reduce the number of values and try again.</string>
+    <string name="error_invalid_filter_value">An invalid value was passed to the filter. Please provide a valid value.</string>
+    <string name="error_no_internet">No internet connection available. Please check your network connection and try again.</string>"
+    <string name="error_server_unreachable">The server is unreachable. Please try again later.</string>
+    <string name="error_empty_response">No character found</string>
+
 </resources>

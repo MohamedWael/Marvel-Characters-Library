@@ -2,12 +2,15 @@ package com.github.mohamedwael.marvelcharslibrary.di
 
 
 import com.github.mohamedwael.marvelcharslibrary.BuildConfig
+import com.github.mohamedwael.marvelcharslibrary.characters.data.API_KEY
 import com.github.mohamedwael.marvelcharslibrary.characters.data.APP_BASE_URL
 import com.github.mohamedwael.marvelcharslibrary.characters.data.MarvelApi
 import com.github.mohamedwael.marvelcharslibrary.characters.data.CharactersRepoImpl
+import com.github.mohamedwael.marvelcharslibrary.characters.data.PRIVATE_KEY
 import com.github.mohamedwael.marvelcharslibrary.characters.domain.CharactersRepo
 import com.github.mohamedwael.marvelcharslibrary.characters.domain.CharactersUseCase
 import com.github.mohamedwael.marvelcharslibrary.characters.domain.CharactersUseCaseImpl
+import com.github.mohamedwael.marvelcharslibrary.util.MarvelApiKeyInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,6 +32,7 @@ class AppModule {
                 level = HttpLoggingInterceptor.Level.BODY
             }
             builder.addInterceptor(loggingInterceptor)
+                .addInterceptor(MarvelApiKeyInterceptor(API_KEY, PRIVATE_KEY))
         }
         return builder.build()
     }
