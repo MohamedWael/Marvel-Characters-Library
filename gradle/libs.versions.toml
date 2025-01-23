@@ -1,10 +1,12 @@
 [versions]
 agp = "8.8.0"
+coilGif = "3.0.4"
 kotlin = "2.0.21"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
+kotlinxSerializationJson = "1.8.0"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.0"
 composeBom = "2025.01.00"
@@ -13,6 +15,8 @@ kotlinxCoroutines = "1.9.0"
 ksp = "2.0.21-1.0.27"
 mockk = "1.13.12"
 moshi = "1.15.1"
+navigationCompose = "2.8.5"
+paletteKtx = "1.0.0"
 retrofit = "2.11.0"
 loggingInterceptor = "4.12.0"
 coil = "3.0.4"
@@ -34,6 +38,9 @@ daggerHilt = "2.51.1"
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutCompose" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+androidx-palette-ktx = { module = "androidx.palette:palette-ktx", version.ref = "paletteKtx" }
+coil-gif = { module = "io.coil-kt.coil3:coil-gif", version.ref = "coilGif" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -56,6 +63,7 @@ jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "j
 jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "jupiter" }
 jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "jupiter" }
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk" }
 moshi = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
@@ -77,3 +85,4 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "daggerHilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

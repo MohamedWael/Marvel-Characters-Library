@@ -2,6 +2,11 @@ package com.github.mohamedwael.marvelcharslibrary.di
 
 
 import com.github.mohamedwael.marvelcharslibrary.BuildConfig
+import com.github.mohamedwael.marvelcharslibrary.characterdetails.data.ResourceUriEndPoint
+import com.github.mohamedwael.marvelcharslibrary.characterdetails.data.ResourceUriRepoImpl
+import com.github.mohamedwael.marvelcharslibrary.characterdetails.domain.ResourceUriRepo
+import com.github.mohamedwael.marvelcharslibrary.characterdetails.domain.ResourceUriUseCase
+import com.github.mohamedwael.marvelcharslibrary.characterdetails.domain.ResourceUriUseCaseImpl
 import com.github.mohamedwael.marvelcharslibrary.characters.data.API_KEY
 import com.github.mohamedwael.marvelcharslibrary.characters.data.APP_BASE_URL
 import com.github.mohamedwael.marvelcharslibrary.characters.data.MarvelApi
@@ -52,4 +57,16 @@ class AppModule {
 
     @Provides
     fun provideUseCase(repo: CharactersRepo): CharactersUseCase = CharactersUseCaseImpl(repo)
+
+
+    @Provides
+    fun provideResourceUriEndPoint(retrofit: Retrofit): ResourceUriEndPoint =
+        retrofit.create(ResourceUriEndPoint::class.java)
+
+    @Provides
+    fun provideResourceUriRepo(api: ResourceUriEndPoint): ResourceUriRepo = ResourceUriRepoImpl(api)
+
+    @Provides
+    fun provideResourceUriUseCase(repo: ResourceUriRepo): ResourceUriUseCase = ResourceUriUseCaseImpl(repo)
+
 }

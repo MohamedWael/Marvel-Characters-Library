@@ -25,16 +25,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.github.mohamedwael.marvelcharslibrary.characters.data.model.EventItem
+import com.github.mohamedwael.marvelcharslibrary.characters.data.model.Events
 import com.github.mohamedwael.marvelcharslibrary.characters.data.model.MarvelCharacter
 import com.github.mohamedwael.marvelcharslibrary.characters.data.model.MarvelData
 import com.github.mohamedwael.marvelcharslibrary.characters.data.model.Thumbnail
 import com.github.mohamedwael.marvelcharslibrary.characters.presentation.DEFAULT_LIMIT
+import com.github.mohamedwael.marvelcharslibrary.ui.components.GifImage
 
 @Composable
 fun MarvelCharacterList(
     modifier: Modifier = Modifier,
     marvelData: MarvelData?,
     isLoading: Boolean,
+    onCharacterClick: (MarvelCharacter) -> Unit,
     loadMoreItems: (limit: Int, offset: Int, total: Int, count: Int) -> Unit
 ) {
     val marvelCharacters = remember { mutableStateOf<List<MarvelCharacter>>(emptyList()) }
@@ -88,7 +92,7 @@ fun MarvelCharacterList(
             )
             IconButton(
                 modifier = Modifier.align(Alignment.CenterEnd),
-                onClick = { /* Handle search */ }
+                onClick = {/* Handle search */ }
             ) {
                 Icon(
                     Icons.Default.Search,
@@ -116,8 +120,7 @@ fun MarvelCharacterList(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable(onClick = {
-                                // Handle character click
-                                item.series
+                                onCharacterClick(item)
                             }),
                     )
                 }
@@ -132,7 +135,10 @@ fun MarvelCharacterList(
                             .padding(16.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        CircularProgressIndicator()
+                        GifImage(
+                            gifResourceDrawable = R.drawable.marvel_loading,
+                            modifier = Modifier.fillMaxSize()
+                        )
                     }
                 }
             }
@@ -148,6 +154,7 @@ fun PreviewCharacterListScreen() {
         MarvelCharacterList(
             marvelData = fakeMarvelData,
             isLoading = false,
+            onCharacterClick = { character -> },
             loadMoreItems = { limit, offset, total, count ->
 
             }
@@ -165,11 +172,17 @@ private val charNames = listOf(
     "Captain America",
     "Black Widow",
 )
-private val chars = (1..30).toList().map {
+val event = Events(items = (1..10).toList().map { EventItem(name = charNames.random()) })
+internal val chars = (1..30).toList().map {
     MarvelCharacter(
         name = charNames.random(),
-        thumbnail = Thumbnail(path = imagePath, extension = "jpg")
+        thumbnail = Thumbnail(path = imagePath, extension = "jpg"),
+        events = event,
+        comics = event,
+        series = event,
+        stories = event
     )
+
 }
 
 private val fakeMarvelData = MarvelData(

@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlinx.serialization)
+
 }
 
 android {
@@ -65,6 +67,7 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.coil)
     implementation(libs.coil.network)
+    implementation(libs.coil.gif)
     implementation(libs.kotlinx.coroutines)
 
     // Json Parser
@@ -73,6 +76,10 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
+
+    implementation (libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+    implementation (libs.androidx.palette.ktx)
 
     testImplementation(libs.mockk)
     testImplementation(libs.junit)

@@ -1,14 +1,16 @@
 package com.github.mohamedwael.marvelcharslibrary.characters.data.model
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class MarvelCharacter(
 
 	@field:SerializedName("thumbnail")
 	val thumbnail: Thumbnail? = null,
 
 	@field:SerializedName("urls")
-	val urls: List<UrlsItem?>? = null,
+	val urls: List<UrlsItem>? = null,
 
 	@field:SerializedName("stories")
 	val stories: Events? = null,

@@ -1,5 +1,6 @@
 package com.github.mohamedwael.marvelcharslibrary.util
 
+import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.math.BigInteger
@@ -22,6 +23,7 @@ class MarvelApiKeyInterceptor(private val apiKey: String, val privateKey: String
             .addQueryParameter(API_KEY, apiKey)
             .build()
 
+        Log.d("generateHash", "intercept: ${newUrl.toString()}")
         // Create a new request with the updated URL
         val newRequest = originalRequest.newBuilder()
             .url(newUrl)
@@ -30,7 +32,7 @@ class MarvelApiKeyInterceptor(private val apiKey: String, val privateKey: String
         return chain.proceed(newRequest)
     }
 
-    fun generateHash(ts: String, privateKey: String, publicKey: String): String {
+    private fun generateHash(ts: String, privateKey: String, publicKey: String): String {
         val input = "$ts$privateKey$publicKey"
         val md5 = MessageDigest.getInstance("MD5")
         return BigInteger(1, md5.digest(input.toByteArray())).toString(16).padStart(32, '0')

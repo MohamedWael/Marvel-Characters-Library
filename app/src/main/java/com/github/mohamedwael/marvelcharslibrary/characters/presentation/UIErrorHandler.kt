@@ -24,5 +24,4 @@ fun handleUIErrorHandler(error: Throwable): Int = when (error) {
     else -> R.string.error_generic
 }
 
-
 fun ResponseState.Error.getErrorMessageResource() = handleUIErrorHandler(this.exception)

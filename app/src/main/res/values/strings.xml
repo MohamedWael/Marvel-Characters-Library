@@ -11,5 +11,11 @@
     <string name="error_no_internet">No internet connection available. Please check your network connection and try again.</string>"
     <string name="error_server_unreachable">The server is unreachable. Please try again later.</string>
     <string name="error_empty_response">No character found</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="events">Events</string>
+    <string name="series">Series</string>
+    <string name="stories">Stories</string>
+    <string name="comics">Comics</string>
 
 </resources>
