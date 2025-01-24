@@ -22,6 +22,7 @@ import com.github.mohamedwael.marvelcharslibrary.R
 import com.github.mohamedwael.marvelcharslibrary.characters.data.model.MarvelCharacter
 import com.github.mohamedwael.marvelcharslibrary.characters.data.model.MarvelData
 import com.github.mohamedwael.marvelcharslibrary.characters.data.model.Thumbnail
+import com.github.mohamedwael.marvelcharslibrary.characters.presentation.getErrorMessageResource
 import com.github.mohamedwael.marvelcharslibrary.characters.presentation.uicomponents.CharacterCard
 import com.github.mohamedwael.marvelcharslibrary.characters.presentation.uicomponents.chars
 import com.github.mohamedwael.marvelcharslibrary.characters.presentation.uicomponents.fakeMarvelData
@@ -107,7 +108,7 @@ fun SearchCharacterScreen(
             is ResponseState.Error -> {
                 // Show error message
                 Text(
-                    text = "Error: ${response.exception.message}",
+                    text = stringResource(R.string.error, response.getErrorMessageResource()),
                     color = Color.Red,
                     modifier = Modifier.padding(16.dp)
                 )
