@@ -43,3 +43,23 @@ The app follows the **MVVM (Model-View-ViewModel)** architectural pattern with a
 | ![Character List](screenshots/list.png) | ![Character Details](screenshots/details.png) |
 
 ---
+
+## Code structure
+
+Marvel-Characters-Library/
+├── app/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/
+│   │   │   │   ├── com.github.mohamedwael.marvelcharslibrary/
+│   │   │   │   │   ├── characters/
+│   │   │   │   │   │   ├── data/                # Data layer (API, repositories)
+│   │   │   │   │   │   ├── domain/              # Domain layer (use cases, models)
+│   │   │   │   │   │   ├── presentation/        # Presentation layer (ViewModels, UI)
+│   │   │   │   │   ├── characterdetails/        # Character details feature
+│   │   │   │   │   ├── di/                      # Dependency injection (Hilt)
+│   │   │   │   │   ├── util/                    # Utility classes (error handling, navigation)
+│   │   │   │   │   ├── ui/                      # UI components (Compose)
+│   │   │   ├── res/                             # Resources (drawables, strings, etc.)
+│   │   │   ├── AndroidManifest.xml              # App manifest
+├── build.gradle                                 # Project-level build configuration
