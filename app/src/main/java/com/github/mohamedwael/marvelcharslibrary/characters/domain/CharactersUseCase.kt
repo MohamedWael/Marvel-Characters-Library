@@ -26,7 +26,7 @@ class CharactersUseCaseImpl @Inject constructor(private val repo: CharactersRepo
             "offset" to offset.toString(),
         )
         if (name != null) {
-            queries["name"] = name
+            queries["nameStartsWith"] = name
         }
 
         return try {

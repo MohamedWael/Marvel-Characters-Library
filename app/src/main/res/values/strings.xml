@@ -17,5 +17,7 @@
     <string name="series">Series</string>
     <string name="stories">Stories</string>
     <string name="comics">Comics</string>
+    <string name="search">Search</string>
+    <string name="back">Back</string>
 
 </resources>
