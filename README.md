@@ -45,7 +45,7 @@ The app follows the **MVVM (Model-View-ViewModel)** architectural pattern with a
 ---
 
 ## Code structure
-
+```
 Marvel-Characters-Library/
 ├── app/
 │   ├── src/
@@ -63,3 +63,7 @@ Marvel-Characters-Library/
 │   │   │   ├── res/                             # Resources (drawables, strings, etc.)
 │   │   │   ├── AndroidManifest.xml              # App manifest
 ├── build.gradle                                 # Project-level build configuration
+
+```
+
+---
