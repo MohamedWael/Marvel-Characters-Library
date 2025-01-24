@@ -38,9 +38,9 @@ The app follows the **MVVM (Model-View-ViewModel)** architectural pattern with a
 
 ## Screenshots
 
-| Character List | Character Details |
-|----------------|-------------------|
-| ![Character List](screenshots/list.png) | ![Character Details](screenshots/details.png) |
+| Character List | Character Details | Search |
+|----------------|-------------------|-------------------|
+| ![Character List](screenshots/list.png) | ![Character Details](screenshots/details.png) | ![Search](screenshots/search.png) |
 
 ---
 
