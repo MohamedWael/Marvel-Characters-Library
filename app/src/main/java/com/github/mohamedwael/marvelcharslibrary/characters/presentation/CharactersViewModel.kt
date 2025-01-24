@@ -1,7 +1,9 @@
 package com.github.mohamedwael.marvelcharslibrary.characters.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.mohamedwael.marvelcharslibrary.characters.data.model.MarvelCharacter
 import com.github.mohamedwael.marvelcharslibrary.characters.data.model.MarvelData
 import com.github.mohamedwael.marvelcharslibrary.characters.domain.CharactersUseCase
 import com.github.mohamedwael.marvelcharslibrary.util.ResponseState
@@ -18,7 +20,8 @@ class CharactersViewModel @Inject constructor(
     private val charactersRepo: CharactersUseCase
 ) : ViewModel() {
 
-
+    private val TAG = "CharactersViewModel"
+    private val characterList = mutableSetOf<MarvelCharacter>()
     private val _characters = MutableStateFlow<ResponseState>(ResponseState.Loading)
     val characters: StateFlow<ResponseState> = _characters
 
@@ -47,10 +50,14 @@ class CharactersViewModel @Inject constructor(
 
             if (response is ResponseState.Success<*>) {
                 val marvelData = response.data as MarvelData?
-                marvelData?.results
+                Log.d(TAG, "getCharacters: before update characterList.size: ${characterList.size}")
+                characterList.addAll(marvelData?.results ?: emptyList())
+                Log.d(TAG, "getCharacters: after update characterList.size: ${characterList.size}")
+                _characters.value = ResponseState.Success(marvelData?.copy(results = characterList.toList()))
+            } else {
+                _characters.value = response
             }
 
-            _characters.value = response
         }
     }
 }

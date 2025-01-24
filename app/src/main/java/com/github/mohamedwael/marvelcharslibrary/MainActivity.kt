@@ -1,17 +1,16 @@
 package com.github.mohamedwael.marvelcharslibrary
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -52,9 +51,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             MarvelCharactersLibraryTheme {
                 Scaffold {
-                    val context = LocalContext.current
                     val navController = rememberNavController()
-
+                    val lazyListState = rememberLazyListState()
                     NavHost(
                         navController = navController,
                         startDestination = CharacterListScreen,
@@ -69,8 +67,8 @@ class MainActivity : ComponentActivity() {
                                     modifier = Modifier,
                                     if (response is ResponseState.Success<*>) response.data as MarvelData else null,
                                     isLoading = response is ResponseState.Loading,
+                                    lazyListState = lazyListState,
                                     onCharacterClick = { character ->
-
                                         navController.navigate(
                                             CharacterDetails(
                                                 Json.encodeToString(
@@ -80,14 +78,10 @@ class MainActivity : ComponentActivity() {
                                         )
                                     },
                                 ) { limit, offset, total, count ->
-                                    Log.d(
-                                        "MainActivity",
-                                        "onCreate: Load more limit: $limit, offset: $offset, total: $total, count: $count"
-                                    )
                                     charactersViewModel.dispatch(
                                         CharactersAction.LoadCharacters(
                                             limit = limit,
-                                            offset = offset + 1,
+                                            offset = offset,
                                             total = total,
                                             count = count
                                         )

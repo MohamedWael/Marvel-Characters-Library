@@ -13,11 +13,11 @@ import com.github.mohamedwael.marvelcharslibrary.R
 import com.github.mohamedwael.marvelcharslibrary.ui.theme.MarvelCharactersLibraryTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.*
@@ -38,41 +38,16 @@ fun MarvelCharacterList(
     modifier: Modifier = Modifier,
     marvelData: MarvelData?,
     isLoading: Boolean,
+    lazyListState: LazyListState,
     onCharacterClick: (MarvelCharacter) -> Unit,
-    loadMoreItems: (limit: Int, offset: Int, total: Int, count: Int) -> Unit
+    loadMoreItems: (limit: Int, offset: Int, total: Int, count: Int) -> Unit,
 ) {
     val marvelCharacters = remember { mutableStateOf<List<MarvelCharacter>>(emptyList()) }
 
     LaunchedEffect(marvelData) {
         marvelData?.results?.let { newResults ->
-            marvelCharacters.value = marvelCharacters.value + newResults
+            marvelCharacters.value = (marvelCharacters.value + newResults).distinctBy { it.id }
         }
-    }
-
-    // Update loading whenever isLoading changes
-    val loading = remember(isLoading) { isLoading }
-
-    val lazyListState = rememberLazyListState()
-
-
-    LaunchedEffect(lazyListState) {
-
-        snapshotFlow { lazyListState.layoutInfo }
-            .collect { layoutInfo ->
-
-                val totalItems = layoutInfo.totalItemsCount
-                val lastVisibleItem = layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
-
-                // Load more items if the user has scrolled to the end
-                if (lastVisibleItem >= totalItems - 1) {
-                    loadMoreItems(
-                        marvelData?.limit ?: DEFAULT_LIMIT,
-                        marvelData?.offset ?: marvelCharacters.value.size,
-                        marvelData?.total ?: 0,
-                        marvelData?.count ?: 0
-                    )
-                }
-            }
     }
 
     Column(modifier = modifier) {
@@ -127,7 +102,7 @@ fun MarvelCharacterList(
             }
 
             // Show a progress indicator at the end if loading
-            if (loading) {
+            if (isLoading) {
                 item {
                     Box(
                         modifier = Modifier
@@ -138,6 +113,19 @@ fun MarvelCharacterList(
                         GifImage(
                             gifResourceDrawable = R.drawable.marvel_loading,
                             modifier = Modifier.fillMaxSize()
+                        )
+                    }
+                }
+            }
+
+            item {
+                LaunchedEffect(Unit) {
+                    if (!isLoading){
+                        loadMoreItems(
+                            marvelData?.limit ?: DEFAULT_LIMIT,
+                            marvelData?.offset?.plus(marvelData.limit ?: 0) ?: 0,
+                            marvelData?.total ?: 0,
+                            marvelData?.count ?: 0
                         )
                     }
                 }
@@ -157,7 +145,8 @@ fun PreviewCharacterListScreen() {
             onCharacterClick = { character -> },
             loadMoreItems = { limit, offset, total, count ->
 
-            }
+            },
+            lazyListState = rememberLazyListState()
         )
     }
 }
@@ -173,8 +162,9 @@ private val charNames = listOf(
     "Black Widow",
 )
 val event = Events(items = (1..10).toList().map { EventItem(name = charNames.random()) })
-internal val chars = (1..30).toList().map {
+internal val chars = (1..30).toList().mapIndexed { index, _ ->
     MarvelCharacter(
+        id = index,
         name = charNames.random(),
         thumbnail = Thumbnail(path = imagePath, extension = "jpg"),
         events = event,
