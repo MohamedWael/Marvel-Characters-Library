@@ -52,18 +52,17 @@ Marvel-Characters-Library/
 │   │   ├── main/
 │   │   │   ├── java/
 │   │   │   │   ├── com.github.mohamedwael.marvelcharslibrary/
-│   │   │   │   │   ├── characters/
-│   │   │   │   │   │   ├── data/                # Data layer (API, repositories)
-│   │   │   │   │   │   ├── domain/              # Domain layer (use cases, models)
-│   │   │   │   │   │   ├── presentation/        # Presentation layer (ViewModels, UI)
-│   │   │   │   │   ├── characterdetails/        # Character details feature
-│   │   │   │   │   ├── di/                      # Dependency injection (Hilt)
-│   │   │   │   │   ├── util/                    # Utility classes (error handling, navigation)
-│   │   │   │   │   ├── ui/                      # UI components (Compose)
-│   │   │   ├── res/                             # Resources (drawables, strings, etc.)
-│   │   │   ├── AndroidManifest.xml              # App manifest
+│   │   │   │   │   ├── characters/              # Character list and search functionality
+│   │   │   │   │   ├── characterdetails/        # Character details screen
+│   │   │   │   │   ├── searchcharacter/         # Search functionality
+│   │   │   │   │   ├── di/                      # Dependency injection setup
+│   │   │   │   │   ├── util/                    # Utility classes (e.g., ResponseState, NavType)
+│   │   │   │   │   ├── ui/                      # UI components (e.g., themes, colors)
+│   │   │   │   │   └── App.kt                   # Application entry point
+│   │   │   └── res/                             # Resources (e.g., drawables, strings)
+│   │   └── test/                                # Unit tests
 ├── build.gradle                                 # Project-level build configuration
-
+└── README.md                                    # This file
 ```
 
 ---
