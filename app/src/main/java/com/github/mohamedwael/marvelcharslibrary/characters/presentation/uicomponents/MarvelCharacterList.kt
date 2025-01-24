@@ -40,6 +40,7 @@ fun MarvelCharacterList(
     isLoading: Boolean,
     lazyListState: LazyListState,
     onCharacterClick: (MarvelCharacter) -> Unit,
+    onSearchClick: () -> Unit,
     loadMoreItems: (limit: Int, offset: Int, total: Int, count: Int) -> Unit,
 ) {
     val marvelCharacters = remember { mutableStateOf<List<MarvelCharacter>>(emptyList()) }
@@ -67,7 +68,7 @@ fun MarvelCharacterList(
             )
             IconButton(
                 modifier = Modifier.align(Alignment.CenterEnd),
-                onClick = {/* Handle search */ }
+                onClick = onSearchClick
             ) {
                 Icon(
                     Icons.Default.Search,
@@ -146,7 +147,8 @@ fun PreviewCharacterListScreen() {
             loadMoreItems = { limit, offset, total, count ->
 
             },
-            lazyListState = rememberLazyListState()
+            lazyListState = rememberLazyListState(),
+            onSearchClick = {}
         )
     }
 }
@@ -175,7 +177,7 @@ internal val chars = (1..30).toList().mapIndexed { index, _ ->
 
 }
 
-private val fakeMarvelData = MarvelData(
+val fakeMarvelData = MarvelData(
     total = 100,
     offset = 0,
     limit = 20,

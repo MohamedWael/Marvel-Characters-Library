@@ -24,6 +24,9 @@ import com.github.mohamedwael.marvelcharslibrary.characters.presentation.Charact
 import com.github.mohamedwael.marvelcharslibrary.characters.presentation.CharactersViewModel
 import com.github.mohamedwael.marvelcharslibrary.characters.presentation.getErrorMessageResource
 import com.github.mohamedwael.marvelcharslibrary.characters.presentation.uicomponents.MarvelCharacterList
+import com.github.mohamedwael.marvelcharslibrary.searchcharacter.SearchCharacterScreen
+import com.github.mohamedwael.marvelcharslibrary.searchcharacter.presentation.SearchCharacterAction
+import com.github.mohamedwael.marvelcharslibrary.searchcharacter.presentation.SearchCharacterViewModel
 import com.github.mohamedwael.marvelcharslibrary.ui.theme.MarvelCharactersLibraryTheme
 import com.github.mohamedwael.marvelcharslibrary.util.ResponseState
 import com.github.mohamedwael.marvelcharslibrary.util.navTypeOf
@@ -32,8 +35,8 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlin.reflect.typeOf
 
-@Serializable
-object CharacterListScreen
+@Serializable object CharacterListScreen
+@Serializable object SearchCharacterScreen
 
 @Serializable
 data class CharacterDetails(val marvelCharacter: String)
@@ -43,7 +46,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
+        val searchViewModel: SearchCharacterViewModel by viewModels()
         val charactersViewModel: CharactersViewModel by viewModels()
         charactersViewModel.dispatch(CharactersAction.LoadCharacters(total = 0, count = 0))
 
@@ -68,6 +71,7 @@ class MainActivity : ComponentActivity() {
                                     if (response is ResponseState.Success<*>) response.data as MarvelData else null,
                                     isLoading = response is ResponseState.Loading,
                                     lazyListState = lazyListState,
+                                    onSearchClick = { navController.navigate(SearchCharacterScreen) },
                                     onCharacterClick = { character ->
                                         navController.navigate(
                                             CharacterDetails(
@@ -115,6 +119,24 @@ class MainActivity : ComponentActivity() {
 
                                 }
                             }
+                        }
+
+                        composable<SearchCharacterScreen> {
+                            val charactersState = searchViewModel.characters.collectAsState()
+                            SearchCharacterScreen(
+                                charactersState = charactersState,
+                                searchCharacter = { query -> searchViewModel.dispatch(SearchCharacterAction.SearchCharacters(query)) },
+                                onCharacterClick = { character ->
+                                    navController.navigate(
+                                        CharacterDetails(
+                                            Json.encodeToString(
+                                                character
+                                            )
+                                        )
+                                    )
+                                },
+                                onBackClick = { navController.popBackStack() }
+                            )
                         }
                     }
                 }
