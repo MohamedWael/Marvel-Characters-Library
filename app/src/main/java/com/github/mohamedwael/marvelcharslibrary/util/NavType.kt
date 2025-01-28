@@ -1,11 +1,8 @@
 package com.github.mohamedwael.marvelcharslibrary.util
 
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import androidx.navigation.NavType
-import com.github.mohamedwael.marvelcharslibrary.CharacterDetails
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
 inline fun <reified T> navTypeOf(

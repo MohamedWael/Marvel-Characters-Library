@@ -1,7 +1,6 @@
 package com.github.mohamedwael.marvelcharslibrary.characterdetails.domain
 
 import com.github.mohamedwael.marvelcharslibrary.characters.data.MarvelApiException
-import com.github.mohamedwael.marvelcharslibrary.characters.data.model.MarvelResponse
 import com.github.mohamedwael.marvelcharslibrary.util.ResponseState
 
 interface ResourceUriUseCase {

@@ -9,8 +9,8 @@ import com.github.mohamedwael.marvelcharslibrary.characterdetails.domain.Resourc
 import com.github.mohamedwael.marvelcharslibrary.characterdetails.domain.ResourceUriUseCaseImpl
 import com.github.mohamedwael.marvelcharslibrary.characters.data.API_KEY
 import com.github.mohamedwael.marvelcharslibrary.characters.data.APP_BASE_URL
-import com.github.mohamedwael.marvelcharslibrary.characters.data.MarvelApi
 import com.github.mohamedwael.marvelcharslibrary.characters.data.CharactersRepoImpl
+import com.github.mohamedwael.marvelcharslibrary.characters.data.MarvelApi
 import com.github.mohamedwael.marvelcharslibrary.characters.data.PRIVATE_KEY
 import com.github.mohamedwael.marvelcharslibrary.characters.domain.CharactersRepo
 import com.github.mohamedwael.marvelcharslibrary.characters.domain.CharactersUseCase

@@ -1,7 +1,6 @@
 package com.github.mohamedwael.marvelcharslibrary.characters.data
 
 import com.github.mohamedwael.marvelcharslibrary.characters.data.model.MarvelResponse
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 

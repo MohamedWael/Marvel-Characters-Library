@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -73,13 +74,7 @@ class MainActivity : ComponentActivity() {
                                     lazyListState = lazyListState,
                                     onSearchClick = { navController.navigate(SearchCharacterScreen) },
                                     onCharacterClick = { character ->
-                                        navController.navigate(
-                                            CharacterDetails(
-                                                Json.encodeToString(
-                                                    character
-                                                )
-                                            )
-                                        )
+                                        navigateToCharacterDetailsScreen(navController, character)
                                     },
                                 ) { limit, offset, total, count ->
                                     charactersViewModel.dispatch(
@@ -127,13 +122,7 @@ class MainActivity : ComponentActivity() {
                                 charactersState = charactersState,
                                 searchCharacter = { query -> searchViewModel.dispatch(SearchCharacterAction.SearchCharacters(query)) },
                                 onCharacterClick = { character ->
-                                    navController.navigate(
-                                        CharacterDetails(
-                                            Json.encodeToString(
-                                                character
-                                            )
-                                        )
-                                    )
+                                    navigateToCharacterDetailsScreen(navController, character)
                                 },
                                 onBackClick = { navController.popBackStack() }
                             )
@@ -143,6 +132,19 @@ class MainActivity : ComponentActivity() {
 
             }
         }
+    }
+
+    private fun navigateToCharacterDetailsScreen(
+        navController: NavHostController,
+        character: MarvelCharacter
+    ) {
+        navController.navigate(
+            CharacterDetails(
+                Json.encodeToString(
+                    character
+                )
+            )
+        )
     }
 
     private fun showErrorMessage(errorMessageResource: Int) {
