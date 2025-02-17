@@ -1,6 +1,5 @@
 package com.github.mohamedwael.marvelcharslibrary.characterdetails.presentation
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -41,12 +40,9 @@ class CharacterDetailsViewModel @Inject constructor(
         } catch (e: Exception) {
             _character.value = ResponseState.Error(e)
         }
-
     }
 
-
     fun loadCharacterImage(resourceUri: String?): MutableState<String> {
-        Log.d(TAG, "loadCharacterImage: $resourceUri")
         val image = mutableStateOf("")
         if (resourceCache.containsKey(resourceUri)) {
             image.value = resourceCache[resourceUri] ?: ""
@@ -60,7 +56,6 @@ class CharacterDetailsViewModel @Inject constructor(
                             val thumbnails =
                                 marvelData.results?.map { it.thumbnail }?.filterNotNull()
                             resourceCache[resourceUri] = thumbnails?.firstOrNull()?.getFullPath() ?: ""
-                            Log.d(TAG, "loadCharacterImage: loaded ${thumbnails.toString()}")
                             image.value = thumbnails?.firstOrNull()?.getFullPath() ?: ""
                         }
 
